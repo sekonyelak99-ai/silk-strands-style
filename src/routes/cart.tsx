@@ -130,14 +130,13 @@ function CartPage() {
   );
 }
 
-function Empty({ title, text, cta }: { title: string; text: string; cta: { to: string; label: string } }) {
+function Empty({ title, text, cta }: { title: string; text: string; cta: { to: "/shop" | "/auth"; label: string } }) {
   return (
     <div className="mx-auto max-w-md px-5 py-32 text-center">
       <h1 className="font-display text-3xl">{title}</h1>
       <p className="mt-3 text-sm text-muted-foreground">{text}</p>
       <Link
-        to={cta.to as "/shop"}
-        search={cta.to === "/shop" ? ({} as never) : undefined}
+        to={cta.to}
         className="mt-8 inline-block bg-primary px-8 py-4 text-xs uppercase tracking-[0.2em] text-primary-foreground"
       >
         {cta.label}
