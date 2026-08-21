@@ -10,8 +10,8 @@ export function ProductCard({
   reviewCount,
 }: {
   product: Product;
-  rating?: number;
-  reviewCount?: number;
+  rating?: number | undefined;
+  reviewCount?: number | undefined;
 }) {
   const { format } = useCurrency();
   const { add } = useCartActions();
