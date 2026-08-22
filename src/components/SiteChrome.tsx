@@ -5,12 +5,24 @@ import { CurrencySelect } from "./CurrencySelect";
 import { useAuth } from "@/lib/auth";
 import { useCart } from "@/lib/store";
 
-const LINKS = [
-  { to: "/shop", label: "Shop" },
-  { to: "/shop", label: "Hair", search: { category: "Raw Bundles" } },
-  { to: "/shop", label: "Skin", search: { category: "Melanin Care" } },
-  { to: "/orders", label: "Orders" },
-] as const;
+function NavLinks({ onNavigate, className }: { onNavigate?: () => void; className: string }) {
+  return (
+    <>
+      <Link to="/shop" search={{}} onClick={onNavigate} className={className}>
+        Shop
+      </Link>
+      <Link to="/shop" search={{ category: "Raw Bundles" }} onClick={onNavigate} className={className}>
+        Hair
+      </Link>
+      <Link to="/shop" search={{ category: "Melanin Care" }} onClick={onNavigate} className={className}>
+        Skin
+      </Link>
+      <Link to="/orders" onClick={onNavigate} className={className}>
+        Orders
+      </Link>
+    </>
+  );
+}
 
 export function Header() {
   const { user } = useAuth();
@@ -26,16 +38,7 @@ export function Header() {
         </button>
 
         <nav className="hidden flex-1 items-center gap-8 md:flex">
-          {LINKS.map((l) => (
-            <Link
-              key={l.label}
-              to={l.to}
-              search={"search" in l ? (l.search as never) : undefined}
-              className="label-mono rule-underline"
-            >
-              {l.label}
-            </Link>
-          ))}
+          <NavLinks className="label-mono rule-underline" />
         </nav>
 
         <Link to="/" className="font-display text-xl tracking-[0.18em] uppercase md:text-2xl">
@@ -64,17 +67,7 @@ export function Header() {
       {open && (
         <div className="border-t border-border px-5 py-4 md:hidden">
           <div className="flex flex-col gap-4">
-            {LINKS.map((l) => (
-              <Link
-                key={l.label}
-                to={l.to}
-                search={"search" in l ? (l.search as never) : undefined}
-                onClick={() => setOpen(false)}
-                className="label-mono"
-              >
-                {l.label}
-              </Link>
-            ))}
+            <NavLinks className="label-mono" onNavigate={() => setOpen(false)} />
             <CurrencySelect />
           </div>
         </div>

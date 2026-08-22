@@ -13,9 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as OrdersIndexRouteImport } from './routes/orders.index'
+import { Route as OrdersOrderIdRouteImport } from './routes/orders.$orderId'
+import { Route as PayTokenRouteImport } from './routes/pay.$token'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -38,6 +41,11 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -53,6 +61,16 @@ const OrdersIndexRoute = OrdersIndexRouteImport.update({
   path: '/orders/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrdersOrderIdRoute = OrdersOrderIdRouteImport.update({
+  id: '/orders/$orderId',
+  path: '/orders/$orderId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PayTokenRoute = PayTokenRouteImport.update({
+  id: '/pay/$token',
+  path: '/pay/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
@@ -64,8 +82,11 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/shop': typeof ShopRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/$orderId': typeof OrdersOrderIdRoute
+  '/pay/$token': typeof PayTokenRoute
   '/product/$slug': typeof ProductSlugRoute
   '/orders/': typeof OrdersIndexRoute
 }
@@ -74,8 +95,11 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/shop': typeof ShopRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/$orderId': typeof OrdersOrderIdRoute
+  '/pay/$token': typeof PayTokenRoute
   '/product/$slug': typeof ProductSlugRoute
   '/orders': typeof OrdersIndexRoute
 }
@@ -85,8 +109,11 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/shop': typeof ShopRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/$orderId': typeof OrdersOrderIdRoute
+  '/pay/$token': typeof PayTokenRoute
   '/product/$slug': typeof ProductSlugRoute
   '/orders/': typeof OrdersIndexRoute
 }
@@ -97,8 +124,11 @@ export interface FileRouteTypes {
     | '/account'
     | '/auth'
     | '/cart'
+    | '/checkout'
     | '/shop'
     | '/wishlist'
+    | '/orders/$orderId'
+    | '/pay/$token'
     | '/product/$slug'
     | '/orders/'
   fileRoutesByTo: FileRoutesByTo
@@ -107,8 +137,11 @@ export interface FileRouteTypes {
     | '/account'
     | '/auth'
     | '/cart'
+    | '/checkout'
     | '/shop'
     | '/wishlist'
+    | '/orders/$orderId'
+    | '/pay/$token'
     | '/product/$slug'
     | '/orders'
   id:
@@ -117,8 +150,11 @@ export interface FileRouteTypes {
     | '/account'
     | '/auth'
     | '/cart'
+    | '/checkout'
     | '/shop'
     | '/wishlist'
+    | '/orders/$orderId'
+    | '/pay/$token'
     | '/product/$slug'
     | '/orders/'
   fileRoutesById: FileRoutesById
@@ -128,8 +164,11 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   AuthRoute: typeof AuthRoute
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   ShopRoute: typeof ShopRoute
   WishlistRoute: typeof WishlistRoute
+  OrdersOrderIdRoute: typeof OrdersOrderIdRoute
+  PayTokenRoute: typeof PayTokenRoute
   ProductSlugRoute: typeof ProductSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
 }
@@ -164,6 +203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -185,6 +231,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orders/$orderId': {
+      id: '/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/orders/$orderId'
+      preLoaderRoute: typeof OrdersOrderIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pay/$token': {
+      id: '/pay/$token'
+      path: '/pay/$token'
+      fullPath: '/pay/$token'
+      preLoaderRoute: typeof PayTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$slug': {
       id: '/product/$slug'
       path: '/product/$slug'
@@ -200,8 +260,11 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   AuthRoute: AuthRoute,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   ShopRoute: ShopRoute,
   WishlistRoute: WishlistRoute,
+  OrdersOrderIdRoute: OrdersOrderIdRoute,
+  PayTokenRoute: PayTokenRoute,
   ProductSlugRoute: ProductSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
 }
