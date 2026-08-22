@@ -38,16 +38,7 @@ export function Header() {
         </button>
 
         <nav className="hidden flex-1 items-center gap-8 md:flex">
-          {LINKS.map((l) => (
-            <Link
-              key={l.label}
-              to={l.to}
-              search={"search" in l ? (l.search as never) : undefined}
-              className="label-mono rule-underline"
-            >
-              {l.label}
-            </Link>
-          ))}
+          <NavLinks className="label-mono rule-underline" />
         </nav>
 
         <Link to="/" className="font-display text-xl tracking-[0.18em] uppercase md:text-2xl">
