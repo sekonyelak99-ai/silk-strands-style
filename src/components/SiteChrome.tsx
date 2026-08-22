@@ -67,17 +67,7 @@ export function Header() {
       {open && (
         <div className="border-t border-border px-5 py-4 md:hidden">
           <div className="flex flex-col gap-4">
-            {LINKS.map((l) => (
-              <Link
-                key={l.label}
-                to={l.to}
-                search={"search" in l ? (l.search as never) : undefined}
-                onClick={() => setOpen(false)}
-                className="label-mono"
-              >
-                {l.label}
-              </Link>
-            ))}
+            <NavLinks className="label-mono" onNavigate={() => setOpen(false)} />
             <CurrencySelect />
           </div>
         </div>
